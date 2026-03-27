@@ -1,0 +1,11 @@
+{
+    "java.project.sourcePaths": [
+        "src/strings",
+        "src/recursion",
+        "src/collections",
+        "src/basics",
+        "src/arrays",
+        "main/java/collections",
+        "src/main/java/collections"
+    ]
+}
