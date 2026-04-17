@@ -38,6 +38,11 @@ public class TeslaInValidSession {
         Session s2 = new Session("A2", "08:00:00", "07:00:00", 15.0, 15.0);
 
         List<Session> sessions = Arrays.asList(s1, s2);
+        /*
+        List <Session> sessions = new ArrayList<>();
+        sessions.addAll(Arrays.asList(s1,s2)); // Another way to add
+        */
+
 
         System.out.println("--- Invalid Sessions Found ---");
         List<Session> invalidOnes = findInvalidSessions(sessions);
@@ -55,13 +60,25 @@ public class TeslaInValidSession {
         
         for (Session s : sessions) {
             try {
+                // 1. Check for Null or Empty values in the Record
+            if (s.sessionid() == null || s.sessionid().isBlank() || 
+                s.startdate() == null || s.enddate() == null) {
+                result.add(s);
+                continue;
+            }
                 // Accessing record fields uses the field name as a method: s.start_time()
                 LocalTime startTime = LocalTime.parse(s.start_time());
                 LocalTime endTime = LocalTime.parse(s.end_time());
 
                 if (!endTime.isAfter(startTime)) {
                     result.add(s);
+                    continue;
                 }
+                if ((s.totalkw() > 0 && s.charge() <= 0) || 
+                (s.charge() > 0 && s.totalkw() <= 0)) {
+                result.add(s);
+                continue;
+            }
             } catch (Exception e) {
                 // If parsing fails, we treat it as an invalid session entry
                 result.add(s);
