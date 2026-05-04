@@ -21,7 +21,8 @@ class MergeIntervals {
 
         List<int []> result = new ArrayList<>();
         int current[] = a[0];
-
+        result.add(current);
+        
         for(int next[]: a){// a is 2D so next is 1D array
            // [[1,3],[2,6] -> 3>2 -> [1,6]
             if(current[1]>=next[0]){// if current end overlap with next start update current end to max
