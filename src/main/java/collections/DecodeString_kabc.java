@@ -2,9 +2,11 @@
 Direct Decoded OutputThe string k[abc] decodes to:abc repeated k times (e.g., abcabc...abc).Practical 
 Examples3[a] → aaa2[abc] → abcabc3[a2[c]] → accaccacc (The inner 2[c] is decoded first into cc, making the outer string 3[acc])
 
-How the Decoding Algorithm WorksTo handle nested brackets and varying values of k, developers typically use a stack-based approach:Maintain Two Stacks: 
-One for the repetition numbers (k) and one for the strings being built.
-Iterate through the String:If you see a digit: Build the full number k.
+How the Decoding Algorithm WorksTo handle nested brackets and varying values of k, developers typically use a stack-based approach:
+Maintain Two Stacks: One for the repetition numbers (k) and one for the strings being built.
+Iterate through the String:
+If you see a digit: 
+Build the full number k.
 If you see an opening bracket [: Push the current built string and the number k onto their respective stacks, then reset your temporary variables.
 If you see a closing bracket ]: Pop the top number and string from the stacks. Repeat the current substring k times and append it to the popped string.
 If you see a letter: Simply append it to your current working string
