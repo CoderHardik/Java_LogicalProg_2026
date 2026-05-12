@@ -16,8 +16,24 @@ Few notes for this prorgam:
 
  3. It uses standard java httpClient and To send the request and perform different API actions. Same was used in mercury interview so should be safe to use
 
- 4. we have getValue method that convert json to string for validation. That is the only tricky part to remember and convert
+ 4. we have getValue method that convert json to string for validation. That is the only tricky part to remember and convert.
 
+json.split("\"" + key + "\":\"?")[1].split("[\",}]")[0]
+* Example of how it works:
+String json = "{\"session_id\":\"S-101\", \"energy_used\":50.5}";We want to find the value for the key: session_id
+
+Step 1: The first .split()json.split("\"" + key + "\":\"?")What it looks for: It searches for "session_id": followed by an optional quote ".
+The Result: It cuts the string into two pieces:[0] : {" (everything before the key)[1] : S-101", "energy_used":50.5} (everything after the key and its colon/quote)
+The Code: .split(...)[1] grabs that second piece.
+
+Step 2: The second .split()[1].split("[\",}]")What it looks for: It takes that second piece (S-101", "energy_used":50.5}) and cuts it again at the first occurrence of a double quote, a comma, or a closing bracket.
+The Result:
+[0] : S-101 (The actual value!)
+[1] : , 
+[2] :  "energy_used":50.5}
+The Code: [0] grabs the very first part, which is your clean value.
+ 
+ Overall:
  Network: Use HttpClient.
  Model: Use Records.
  Parse: Manipulate Strings without a "magic" library.
