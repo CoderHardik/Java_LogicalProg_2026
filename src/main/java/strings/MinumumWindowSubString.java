@@ -43,6 +43,11 @@ public class MinumumWindowSubString {
 
         // 1. Build frequency map for the target string T
         int[] targetFreq = new int[128]; // Use 128 for all ASCII characters
+        /* an int[128] array creates exactly 128 integer slots indexed from 0 to 127
+           For t = "aab"
+           At index 97 (the code for 'a'): the value is 2 (since 'a' appears twice).
+           At index 98 (the code for 'b'): the value is 1 (since 'b' appears once).
+         */
         for (char c : t.toCharArray()) {
             targetFreq[c]++;
         }
@@ -53,16 +58,26 @@ public class MinumumWindowSubString {
         int count = 0; // Tracks how many characters from T are currently in our window
 
         // 2. Expand the window using the 'right' pointer
+
+      /*
+    Main logic of shrink is as below;
+    in right section, we are going to build string that has all chars from T. Now this will be string with max char
+    Once we build this, we are going to record it as minwindow
+    After record, we move to last bit for left. 
+    With left logic, we see if we can remove character and if we still can have valid string, if so we got better minimum window
+    if not, then earlier string we build was correct one and already recorded minwindow. and now since we are moving left++, we are going to look for next minwindow
+     */
+    
         while (right < s.length()) {
             char rightChar = s.charAt(right);
             
-            // If this character is needed for T, increment our satisfied count
+            // If this character is present in T, increment count
             if (targetFreq[rightChar] > 0) {
                 count++;
             }
-            // Decrement frequency (negative values mean extra characters)
+            // Decrement frequency
             targetFreq[rightChar]--;
-
+           
             // 3. When the window is "valid" (contains all characters of T), try to shrink it
             while (count == t.length()) {
                 // Update the minimum window if the current one is smaller
