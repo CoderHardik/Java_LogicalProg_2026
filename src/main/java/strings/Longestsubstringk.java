@@ -46,7 +46,15 @@ Map is now {e:1, b:1}.
 Check: Map size is now 2. The while loop stops!
 Step 4: Resume
 Now the window is just [e, b]. i moves to the next character ('a') and the process repeats.
-Why
+
+The final answer to the complete execution of the example is 
+3.The longest valid substrings are "ece" (indices 0 to 2) and "ceb" (indices 1 to 3), both of which have a maximum length of 3.
+Here is how the execution finishes after the steps described in your prompt:After 
+Step 3: The window shrinks to [e, b] (indices 2 to 3). 
+The current max length recorded is 3 (from "ece").Step 4 (Next character): The lead scout i moves to the last character 'a'. 
+The map becomes {e:1, b:1, a:1}, which has 3 unique characters.Shrinking again: The tail j shrinks the window from the left by removing 'e'. 
+The map becomes {b:1, a:1}, which is valid. The window is now [b, a] (length 2).
+End of string: The loop terminates. The maximum length found during the entire process remains 3.
 */
 public class Longestsubstringk {
 
