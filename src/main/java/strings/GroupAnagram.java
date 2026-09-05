@@ -62,7 +62,7 @@ public class GroupAnagram {
             char[] charArray = s.toCharArray();
             Arrays.sort(charArray);
             
-            // 2. Use the sorted string as the unique key
+            // 2. Use the sorted string as the unique key. value of create string. ex If your charArray contains the characters ['h', 'e', 'l', 'l', 'o'], running this line of code will join them together and store the word "hello" inside the key variable.
             String key = String.valueOf(charArray);
             
             // 3. Add original string to the corresponding list in the map
