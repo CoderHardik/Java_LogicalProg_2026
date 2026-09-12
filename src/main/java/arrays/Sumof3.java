@@ -70,7 +70,7 @@ public class Sumof3 {
             backtrack(results, path, nums, n, remainingSum - current, i + 1);
             //After we tried this current number, the loop can move to the next i and try a different number in that same slot.
             // Basically following line will remove element for all trials that did not work out.i.e. 1,2,3 -> 1,2 : 1,2,6 -> 1 and then jump to 2,3 if unmderstand
-            path.remove(path.size() - 1); // Backtrack to check next
+            path.remove(path.size() - 1); //  removes the very last element that was added to your list.
         }
     }
 
