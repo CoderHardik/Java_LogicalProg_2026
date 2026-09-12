@@ -1,5 +1,9 @@
 
 /*
+
+Initial Question: "Can you solve the Two-Sum problem where you find two numbers that add up to a target?"
+Follow-up 1: "Now, how would you change that to find three numbers (3-Sum)?"
+The Twist (Your Code): "What if I want a generic function where the user can pass in any integer \(N\) (like 3, 4, or 5) along with the target? How would you modify your approach to handle an arbitrary \(N\)?"
 Logic - 
 
 Frame 2 is running this loop:
