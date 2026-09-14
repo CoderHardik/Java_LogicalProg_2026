@@ -38,15 +38,15 @@ public class StairCaseProblem {
         if (n<=1) return 1;
         if (n==2) return 2;
 
-        int first=1; // Ways to reach 1 step
-        int second=2; // Ways to reach 2 steps
-        int current=0;
+        int initial=1; // Ways to reach 1 step
+        int next=2; // Ways to reach 2 steps
+        int sum=0;
         for(int i=3; i<=n; i++){
-            current = first+second;
-            first=second;
-            second=current;
+            sum = initial+next;
+            initial=next;
+            next=sum;
         }
-        return second;
+        return next;
     }
     
 }
