@@ -19,10 +19,72 @@ Using this logic, the problem boils down to finding how many times a specific pr
 If it does, it means there exists a subarray whose sum is k, and we increment the count by how many times that difference has occurred.
 4. HashMap Update: After processing each element, we update the hash map to reflect the new prefix sum, ensuring that future elements can find valid subarrays starting at previous indices.
 
-Why sum-k:
-In [1, 2, 1],
-- you would find [1, 2] because the sum is 3. But you would miss the subarray [2, 1] because the total sum at that point is 4.
-- When the sum is 4, you look for 4 - 3 = 1. Since the sum was 1 at the very beginning, the code knows that everything added after that 1 (which is 2 + 1) must equal 3.
+======================================================================
+DRY RUN: Subarray Sum Equals K
+======================================================================
+Input:
+  nums = [1, 2, 3]
+  k = 3
+
+Initial Setup:
+  map = {0=1}  (Base case: prefix sum of 0 has appeared 1 time)
+  count = 0
+  sum = 0
+
+----------------------------------------------------------------------
+Iteration 1: num = 1
+----------------------------------------------------------------------
+1. Update sum:
+   sum = 0 + 1 = 1
+
+2. Check if (sum - k) exists in map:
+   sum - k = 1 - 3 = -2
+   Is -2 in map? No.
+   Action: count remains 0
+
+3. Update Map with current sum (1):
+   map.put(1, map.getOrDefault(1, 0) + 1)
+   State: map = {0=1, 1=1}
+   State: count = 0
+
+----------------------------------------------------------------------
+Iteration 2: num = 2
+----------------------------------------------------------------------
+1. Update sum:
+   sum = 1 + 2 = 3
+
+2. Check if (sum - k) exists in map:
+   sum - k = 3 - 3 = 0
+   Is 0 in map? YES! (Value/Frequency is 1)
+   Action: count += map.get(0) -> count = 0 + 1 = 1
+   Subarray found: [1, 2] (Indices 0 to 1)
+
+3. Update Map with current sum (3):
+   map.put(3, map.getOrDefault(3, 0) + 1)
+   State: map = {0=1, 1=1, 3=1}
+   State: count = 1
+
+----------------------------------------------------------------------
+Iteration 3: num = 3
+----------------------------------------------------------------------
+1. Update sum:
+   sum = 3 + 3 = 6
+
+2. Check if (sum - k) exists in map:
+   sum - k = 6 - 3 = 3
+   Is 3 in map? YES! (Value/Frequency is 1)
+   Action: count += map.get(3) -> count = 1 + 1 = 2
+   Subarray found: [3] (Indices 2 to 2)
+
+3. Update Map with current sum (6):
+   map.put(6, map.getOrDefault(6, 0) + 1)
+   State: map = {0=1, 1=1, 3=1, 6=1}
+   State: count = 2
+
+======================================================================
+Execution Finished
+======================================================================
+Total Subarrays Found (count): 2
 
 So basically it will keep count of all sub array from beginning
 checking sum-k in map will tell us if some subarray alread totalled this, if so then we have new sub array that has sum of K (removing that subarray that totalled sum at that time)
