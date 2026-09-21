@@ -55,7 +55,7 @@ public static boolean deepCompare(Map<String, Object> map1, Map<String, Object> 
         if (!map2.containsKey(key)) return false;
 
         Object val1 = map1.get(key);
-        Object val2 = map2.get(key);
+        Object val2 = map2.get(key);// we are not iterating over map2 but we already checked key is in map2 key
 
         if (val1 instanceof Map && val2 instanceof Map) {
             // Recursive call for nested maps
